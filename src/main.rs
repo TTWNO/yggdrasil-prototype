@@ -93,9 +93,9 @@ async fn main() -> Result<(), dbus::Error> {
         );
         println!("{:?}", accessible.name().await);
         println!("{:?}", accessible.localized_role_name().await);
-        accessible.children().await.unwrap().for_each(|a| async {
-            println!("{:?}", a.name().await);
-        });
+        for acc in accessible.children().await.unwrap() {
+          println!("{:?}", acc.name().await);
+        }
         /*
         let name_fut: MethodReply<String> = accessible.get("org.a11y.atspi.Accessible", "Name");
         let chr_cnt_fut: MethodReply<i32> = accessible.get("org.a11y.atspi.Text", "CharacterCount");
