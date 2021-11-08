@@ -91,10 +91,10 @@ async fn main() -> Result<(), dbus::Error> {
             Arc::clone(&conn),
             TIMEOUT,
         );
-        println!("{:?}", accessible.name().await);
+        println!("{:?}", accessible.get_text().await);
         println!("{:?}", accessible.localized_role_name().await);
         for acc in accessible.children().await.unwrap() {
-          println!("{:?}", acc.name().await);
+          println!("{:?}", acc.get_text().await);
         }
         /*
         let name_fut: MethodReply<String> = accessible.get("org.a11y.atspi.Accessible", "Name");
